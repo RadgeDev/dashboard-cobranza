@@ -12,15 +12,21 @@ router.get('/ingreso',(req,res)=>{
 })
 
 
-router.get('/',authController.isAuthenticated,authController.showUsers,authController.showRecaudacion,(req,res)=>{
+router.get('/',authController.isAuthenticated,authController.showMeta,authController.showRecaudacion,(req,res)=>{
   res.render('index_dash',{user:req.usuario,resultado:req.datos,abonos:req.recaudado})
 
   
 })
 
 
-router.get('/dashboard',(req,res)=>{
+router.get('/dashboard',authController.isAuthenticated,(req,res)=>{
   res.render('index_dash')
+})
+
+router.get('/historico',authController.isAuthenticated,authController.showMeta,authController.showRecaudacion,(req,res)=>{
+  res.render('recaudacion_hist',{user:req.usuario,resultado:req.datos,abonos:req.recaudado})
+
+  
 })
 
 

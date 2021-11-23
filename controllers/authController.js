@@ -113,10 +113,11 @@ exports.logout = (req, res)=>{
 }
 
 
-exports.showUsers = async (req, res,next)=>{
+exports.showMeta = async (req, res,next)=>{
     try {
-         let fec_ini = '2021-11-01'
-        conexion.query('CALL RECAUDACION_2022(?)',[fec_ini],  (error, results)=>{
+        var date = new Date();
+        var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+        conexion.query('CALL RECAUDACION_2022(?)',[firstDay],  (error, results)=>{
             if(!results){return next()}
             req.datos = JSON.stringify(results) ; 
             return next()
@@ -130,15 +131,19 @@ exports.showUsers = async (req, res,next)=>{
 
 exports.showRecaudacion = async (req, res,next)=>{
     try {
-         let fec_ini = '2021-11-01'
+
+         var date = new Date();
+         var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+         var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+
          let sql ='select c0(IFNULL(SUM(MONT_TRAN),0)) RTOTAL, '  +
          'c0(IFNULL(SUM(IF(FOL_EECC > 0 , MONT_TRAN ,0)),0)) AS RNORMAL,' +
          'c0(IFNULL(SUM(IF(FOL_EECC = 0 , MONT_TRAN ,0)),0)) AS RCASTIGO,' +
          'c0(IFNULL(SUM(IF(FEC_TRAN = CURDATE() , MONT_TRAN ,0)),0)) AS RHOY,'+
          'c0(IFNULL(SUM(IF(FOL_EECC > 0 AND FEC_TRAN = CURDATE() , MONT_TRAN ,0)),0)) AS RNORMALHOY,'+
          'c0(IFNULL(SUM(IF(FOL_EECC = 0 AND FEC_TRAN = CURDATE() , MONT_TRAN ,0)),0)) AS RCASTIGOHOY '+
-         ' from abonos where FEC_TRAN  BETWEEN ? AND LAST_DAY(NOW())  and N_TRAN NOT IN(select N_TRAN  from transac WHERE N_MAQUI = 68)';
-         conexion.query(sql,[fec_ini],  (error, results)=>{
+         ' from abonos where FEC_TRAN  BETWEEN ? AND LAST_DAY(?)  and N_TRAN NOT IN(select N_TRAN  from transac WHERE N_MAQUI = 68)';
+         conexion.query(sql,[firstDay,lastDay],  (error, results)=>{
             if(!results){return next()}
             req.recaudado = JSON.stringify(results) ; 
             return next()

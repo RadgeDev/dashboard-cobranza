@@ -155,5 +155,102 @@ exports.showRecaudacion = async (req, res,next)=>{
 }
 
 
+exports.reca = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+       
+        if(!fecini ){
+            res.render('recaudacion_hist',{
+                alert:true,
+                alertTitle: "Advertencia",
+                alertMessage: "Ingrese una fecha",
+                alertIcon:'info',
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'recaudacion_hist'
+            })
+        }else{
+            
+            console.log(formatDate(fecini));
+        
+        
+         
+            var date = new Date(fecini);
+            var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+            var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+   
+            conexion.query('CALL RECAUDACION_2022(?)',[firstDay],  (error, results)=>{
+               if(results){
+                res.send(results[0]);
+        
+               }
+           }) 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+exports.resumen = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+        console.log(fecini);
+
+        if(!fecini ){
+            res.render('recaudacion_hist',{
+                alert:true,
+                alertTitle: "Advertencia",
+                alertMessage: "Ingrese una fecha",
+                alertIcon:'info',
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'recaudacion_hist'
+            })
+        }else{
+            
+            console.log(formatDate(fecini));
+        
+        
+            var date = new Date(fecini);
+            var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+            var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+   
+            let sql ='select c0(IFNULL(SUM(MONT_TRAN),0)) RTOTAL, '  +
+            'c0(IFNULL(SUM(IF(FOL_EECC > 0 , MONT_TRAN ,0)),0)) AS RNORMAL,' +
+            'c0(IFNULL(SUM(IF(FOL_EECC = 0 , MONT_TRAN ,0)),0)) AS RCASTIGO' +
+            ' from abonos where FEC_TRAN  BETWEEN ? AND LAST_DAY(?)  and N_TRAN NOT IN(select N_TRAN  from transac WHERE N_MAQUI = 68)';
+   
+            conexion.query(sql,[firstDay,lastDay],  (error, results)=>{
+               if(results){
+                res.send(results[0]);
+        
+               }
+           }) 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 

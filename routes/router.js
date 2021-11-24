@@ -40,6 +40,9 @@ router.post('/register',authController.register)
 router.post('/formLogin',authController.login)
 router.get('/logout',authController.logout)
 
+router.post('/formReca',authController.reca)
+router.post('/resumen',authController.resumen)
+
 
 
 

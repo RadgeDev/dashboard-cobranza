@@ -24,7 +24,7 @@ router.get('/dashboard',authController.isAuthenticated,(req,res)=>{
 })
 
 router.get('/historico',authController.isAuthenticated,authController.showMeta,authController.showRecaudacion,(req,res)=>{
-  res.render('recaudacion_hist',{user:req.usuario,resultado:req.datos,abonos:req.recaudado})
+  res.render('recaudacion_hist',{user:req.usuario,resultado:req.datos,abonos:req.recaudado,alert:false})
 
   
 })

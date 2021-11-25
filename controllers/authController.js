@@ -160,25 +160,13 @@ exports.reca = async (req,res)=>{
         const fecini = req.body.fecha
        
         if(!fecini ){
-            res.render('recaudacion_hist',{
-                alert:true,
-                alertTitle: "Advertencia",
-                alertMessage: "Ingrese una fecha",
-                alertIcon:'info',
-                showConfirmButton: true,
-                timer: false,
-                ruta: 'recaudacion_hist'
-            })
+            res.send("VACIO");
         }else{
             
-            console.log(formatDate(fecini));
-        
-        
-         
-            var date = new Date(fecini);
+            format = toDate(fecini);
+       
+            var date = new Date(format);
             var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
-            var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
-   
             conexion.query('CALL RECAUDACION_2022(?)',[firstDay],  (error, results)=>{
                if(results){
                 res.send(results[0]);
@@ -198,27 +186,17 @@ exports.reca = async (req,res)=>{
 exports.resumen = async (req,res)=>{
     try {
         const fecini = req.body.fecha
-        console.log(fecini);
 
         if(!fecini ){
-            res.render('recaudacion_hist',{
-                alert:true,
-                alertTitle: "Advertencia",
-                alertMessage: "Ingrese una fecha",
-                alertIcon:'info',
-                showConfirmButton: true,
-                timer: false,
-                ruta: 'recaudacion_hist'
-            })
+            res.send("VACIO");
         }else{
             
-            console.log(formatDate(fecini));
+            format = toDate(fecini);
+
         
-        
-            var date = new Date(fecini);
+            var date = new Date(format);
             var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
             var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
-   
             let sql ='select c0(IFNULL(SUM(MONT_TRAN),0)) RTOTAL, '  +
             'c0(IFNULL(SUM(IF(FOL_EECC > 0 , MONT_TRAN ,0)),0)) AS RNORMAL,' +
             'c0(IFNULL(SUM(IF(FOL_EECC = 0 , MONT_TRAN ,0)),0)) AS RCASTIGO' +
@@ -241,16 +219,9 @@ exports.resumen = async (req,res)=>{
 
 
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-}
+function toDate(dateStr) {
+    var parts = dateStr.split("-")
+    return new Date(parts[2], parts[1] - 1, parts[0])
+  }
 
 

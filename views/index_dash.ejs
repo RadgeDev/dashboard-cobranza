@@ -241,7 +241,7 @@
                                 <div class="col-md-6 col-xl-4">
                                     <div class="card daily-sales">
                                         <div class="card-block">
-                                            <h6 class="mb-4">Recaudación Mes</h6>
+                                            <h6 class="mb-4">Recaudación Total Mes</h6>
                                             <div class="row d-flex align-items-center">
                                                 <div class="col-9">
                                                     <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i> <% if (abonos) { var a = JSON.parse(abonos) ; var abo = a[0]; %>   <%=  abo.RTOTAL %><% } %></h3>
@@ -450,10 +450,24 @@
     <!-- Warning Section Ends -->
 
     <!-- Required Js -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="dashboard/assets/js/vendor-all.min.js"></script>
 	<script src="dashboard/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="dashboard/assets/js/pcoded.min.js"></script>
+      <script>
+      $(document).ready(function(){
+   
+        setTimeout(function(){ 
+            
+            location.reload(true); 
+        
+        }, 600000);
 
+   
+
+   });
+
+      </script>
 
 </body>
 </html>

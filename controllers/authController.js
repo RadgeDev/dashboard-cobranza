@@ -1,3 +1,4 @@
+
 const jwt =  require('jsonwebtoken')
 const bycryptjs = require('bcryptjs')
 const conexion =  require('../database/db')
@@ -89,18 +90,37 @@ exports.login = async (req,res)=>{
     }
 }
 
+
+
 exports.isAuthenticated = async (req, res, next)=>{
     if (req.cookies.jwt) {
         try {
             const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+
+
             conexion.query('SELECT * FROM usuarios WHERE usuario = ?', [decodificada.id], (error, results)=>{
-                if(!results){return next()}
+                if(!results){
+                    
+                  return next()
+                
+                }
                 req.usuario = results[0]
                 return next()
             })
         } catch (error) {
-            console.log(error)
-            return next()
+
+            if (error.name === 'TokenExpiredError') 
+                {
+                  res.redirect('/ingreso') 
+                  res.clearCookie('jwt');
+                  return next();
+                }else{
+
+                   console.log(error)
+                   return next()
+                }
+            
+      
         }
     }else{
         res.redirect('/ingreso')        
@@ -181,8 +201,6 @@ exports.reca = async (req,res)=>{
     }
 }
 
-
-
 exports.resumen = async (req,res)=>{
     try {
         const fecini = req.body.fecha
@@ -215,6 +233,55 @@ exports.resumen = async (req,res)=>{
         console.log(error)
     }
 }
+
+
+exports.gettramo = async (req,res)=>{
+    try {
+        const rut = req.body.rut
+ 
+        if(!rut ){
+            res.send("VACIO");
+        }else{
+                     
+            conexion.query(' select rut,nombre,dias,tramo,comuna from asignaciones_guardadas where rut = ? ',[rut],  (error, results)=>{
+               if(results.length > 0){
+                   res.send(results[0]);
+               }else{
+                  res.send("NoDatos");
+               }
+           }) 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+exports.updatetramo = async (req,res)=>{
+    try {
+        const rut = req.body.rut
+        const dias = req.body.dias
+        const tramo = req.body.tramo
+        console.log(rut+dias+tramo);
+       
+     if(!rut ||!dias ||!tramo  ){
+            res.send("VACIO");
+        }else{
+                     
+            conexion.query(' update asignaciones_guardadas set dias = ? ,tramo = ?  where rut = ? ',[dias,tramo,rut],  (error, results)=>{
+                if (error) throw err;
+                res.send("ACTUALIZADO");
+               
+
+              });
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 
 

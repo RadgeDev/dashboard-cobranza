@@ -35,6 +35,12 @@ router.get('/registro',authController.isAuthenticated,(req,res)=>{
 })
 
 
+router.get('/tramo',authController.isAuthenticated,(req,res)=>{
+  res.render('cambio_tramo',{user:req.usuario,alert:false})
+})
+
+
+
 //enrutador para los metodos del controller
 router.post('/register',authController.register)
 router.post('/formLogin',authController.login)
@@ -42,6 +48,9 @@ router.get('/logout',authController.logout)
 
 router.post('/formReca',authController.reca)
 router.post('/resumen',authController.resumen)
+router.post('/gettramo',authController.gettramo)
+router.post('/updatetramo',authController.updatetramo)
+
 
 
 

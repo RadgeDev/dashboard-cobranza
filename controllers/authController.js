@@ -3,6 +3,11 @@ const jwt =  require('jsonwebtoken')
 const bycryptjs = require('bcryptjs')
 const conexion =  require('../database/db')
 const {promisify} = require('util')
+var fs = require('fs');
+var bodyParser = require('body-parser');
+var pdf = require('html-pdf');
+
+
 
 //metodo para registrarnos
 exports.register = async (req,res)=>{
@@ -264,8 +269,6 @@ exports.updatetramo = async (req,res)=>{
         const rut = req.body.rut
         const dias = req.body.dias
         const tramo = req.body.tramo
-        console.log(rut+dias+tramo);
-       
      if(!rut ||!dias ||!tramo  ){
             res.send("VACIO");
         }else{
@@ -282,6 +285,32 @@ exports.updatetramo = async (req,res)=>{
     }
 }
 
+
+
+exports.crearpdf = async (req,res)=>{
+    try {
+        
+        var html = fs.readFileSync('./pdf/plantilla/plantilla.html', 'utf8');
+        console.log(html);
+        if (!html){
+            res.status(400).send("Missing 'htmlPath'");
+            return;
+        }
+        // you may want to change this path dynamically if you also wish to keep the generated PDFs
+        var pdfFilePath = './pdf/archivo/repacta.pdf';
+        var options = { format: 'Letter' };
+
+
+       pdf.create(html, options).toFile(pdfFilePath, function(err, res) {
+       if (err) return console.log(err);
+         //console.log(res); // { filename: '/app/businesscard.pdf' }
+         return 'OK';
+       });
+       
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 

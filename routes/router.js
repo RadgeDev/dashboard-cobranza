@@ -40,6 +40,10 @@ router.get('/tramo',authController.isAuthenticated,(req,res)=>{
 })
 
 
+router.get('/pdf',authController.isAuthenticated,(req,res)=>{
+  res.render('crear_pdf',{user:req.usuario,alert:false})
+})
+
 
 //enrutador para los metodos del controller
 router.post('/register',authController.register)
@@ -50,6 +54,7 @@ router.post('/formReca',authController.reca)
 router.post('/resumen',authController.resumen)
 router.post('/gettramo',authController.gettramo)
 router.post('/updatetramo',authController.updatetramo)
+router.post('/crearpdf',authController.crearpdf)
 
 
 

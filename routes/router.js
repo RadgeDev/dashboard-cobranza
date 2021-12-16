@@ -26,8 +26,14 @@ router.get('/dashboard',authController.isAuthenticated,(req,res)=>{
 router.get('/historico',authController.isAuthenticated,authController.showMeta,authController.showRecaudacion,(req,res)=>{
   res.render('recaudacion_hist',{user:req.usuario,resultado:req.datos,abonos:req.recaudado,alert:false})
 
-  
 })
+
+
+router.get('/mcobrador',authController.isAuthenticated,authController.showcobrador,authController.metacobrador,(req,res)=>{
+  res.render('monitor_cobradores',{user:req.usuario,resultado:req.datos,metacob:req.metas ,alert:false})
+
+})
+
 
 
 router.get('/registro',authController.isAuthenticated,(req,res)=>{

@@ -153,6 +153,43 @@ exports.showMeta = async (req, res,next)=>{
     }
 }
 
+exports.showcobrador = async (req, res,next)=>{
+    try {
+        var date = new Date();
+         var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+         var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+    
+        conexion.query('CALL MONITOR_EXCUSAS(?,?)',[firstDay,lastDay],  (error, results)=>{
+            if(!results){return next()}
+            req.datos = results[0] ; 
+            return next()
+        })
+     } catch (error) {
+        console.log(error)
+
+    }
+}
+
+
+exports.metacobrador = async (req, res,next)=>{
+    try {
+        var date = new Date();
+         var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+         var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+    
+        conexion.query('select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2;'
+        ,[firstDay,lastDay],  (error, results)=>{
+            if(!results){; return next()}
+            req.metas = results ; 
+            return next()
+        })
+     } catch (error) {
+        console.log(error)
+
+    }
+}
+
+
 
 exports.showRecaudacion = async (req, res,next)=>{
     try {

@@ -155,19 +155,54 @@ exports.showMeta = async (req, res,next)=>{
 
 exports.showcobrador = async (req, res,next)=>{
     try {
-        var date = new Date();
-         var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
-         var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+          
+            date = new Date();
+            fecini =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+            lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+ 
     
-        conexion.query('CALL MONITOR_EXCUSAS(?,?)',[firstDay,lastDay],  (error, results)=>{
+        conexion.query('CALL MONITOR_EXCUSAS(?,?)',[fecini,lastDay],  (error, results)=>{
             if(!results){return next()}
             req.datos = results[0] ; 
             return next()
         })
+       
      } catch (error) {
         console.log(error)
 
     }
+}
+
+
+
+
+exports.cobradoresultado = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+        const fecfin = req.body.fecha2
+        if(isEmpty(fecini) || isEmpty(fecfin)  ){
+            res.send("VACIO");
+        }else{
+            
+         
+            conexion.query('CALL MONITOR_EXCUSAS(?,?)',[fecini,fecfin],  (error, results)=>{
+               if(results){
+                res.send(results[0]);
+        
+               }
+           }) 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+function isEmpty(str) {
+    return (!str || str.length === 0 );
 }
 
 
@@ -176,9 +211,15 @@ exports.metacobrador = async (req, res,next)=>{
         var date = new Date();
          var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
          var lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+         let sql = 'select  a.SEMANA as SEMANA,a.META_GESTION as META_GESTION,a.ENTREGADOS as ENTREGADO, a.RESULTADO AS RESULTADO from '+
+         ' (select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2)a '+
+         ' UNION ALL ' +
+         ' select  "TOTAL" as Total,SUM(a.META_GESTION) as META_GESTION,SUM(a.ENTREGADOS) as ENTREGADO, SUM(a.RESULTADO) AS RESULTADO from '+
+         ' (select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2)a;'
+  
     
-        conexion.query('select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2;'
-        ,[firstDay,lastDay],  (error, results)=>{
+        conexion.query(sql
+        ,[firstDay,lastDay,firstDay,lastDay],  (error, results)=>{
             if(!results){; return next()}
             req.metas = results ; 
             return next()
@@ -189,7 +230,35 @@ exports.metacobrador = async (req, res,next)=>{
     }
 }
 
+exports.metacobradorgeneral = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+        const fecfin = req.body.fecha2
+        
+        let sql = 'select  a.SEMANA as SEMANA,a.META_GESTION as META_GESTION,a.ENTREGADOS as ENTREGADO, a.RESULTADO AS RESULTADO from '+
+        ' (select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2)a '+
+        ' UNION ALL ' +
+        ' select  "TOTAL" as Total,SUM(a.META_GESTION) as META_GESTION,SUM(a.ENTREGADOS) as ENTREGADO, SUM(a.RESULTADO) AS RESULTADO from '+
+        ' (select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2)a;'
+ 
+        if(isEmpty(fecini) || isEmpty(fecfin)  ){
+            res.send("VACIO");
+        }else{
+            
+         
+            conexion.query(sql,[fecini,fecfin,fecini,fecfin],  (error, results)=>{
+               if(results){
+                res.send(results);
+        
+               }
+           }) 
 
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 exports.showRecaudacion = async (req, res,next)=>{
     try {
@@ -266,6 +335,53 @@ exports.resumen = async (req,res)=>{
                if(results){
                 res.send(results[0]);
         
+               }
+           }) 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+
+exports.resumen_cobrador = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+        const fecfin = req.body.fecha2
+        const cobrador = req.body.cobrador
+
+
+        if(isEmpty(fecini) || isEmpty(fecfin)  || isEmpty(cobrador) ){
+            res.send("VACIO");
+        }else{
+            
+           /* format = toDate(fecini);
+            format2 = toDate(fecfin);
+
+        
+            var date = new Date(format);
+            var date2 = new Date(format2);
+            var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+            var lastDay = (new Date(date2.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+            */
+            var firstDay = fecini;
+            var lastDay = fecfin;
+            var cobradors = cobrador;
+
+            let sql =
+            'select fecha,cobrador,programa,entregado,deficit' +
+            ' from  MONITOR_GESTION where fecha BETWEEN  ? and ? and cobrador = ?'+
+            ' UNION ALL ' +
+            ' select "Total" as Total,cobrador,SUM(programa) as programa ,SUM(entregado),SUM(deficit) ' +
+            ' from  MONITOR_GESTION where fecha BETWEEN  ? and ? and cobrador = ? ;';
+            conexion.query(sql,[firstDay,lastDay,cobradors,firstDay,lastDay,cobradors],  (error, results)=>{
+               if(results){
+             
+                res.send(results);
                }
            }) 
 

@@ -61,10 +61,11 @@ router.post('/resumen',authController.resumen)
 router.post('/gettramo',authController.gettramo)
 router.post('/updatetramo',authController.updatetramo)
 router.post('/crearpdf',authController.crearpdf)
-
-
-
-
-
+router.post('/resumen_cobrador',authController.resumen_cobrador)
+router.post('/cobradoresultado',authController.cobradoresultado)
+router.post('/metacobradorgeneral',authController.metacobradorgeneral)
+router.get('/Descargapdf', (req, res) => {
+  res.download('/root/cobranza_cyd/pdf/archivo/repacta.pdf');
+});
 
 module.exports = router

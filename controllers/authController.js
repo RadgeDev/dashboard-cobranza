@@ -218,8 +218,7 @@ exports.metacobrador = async (req, res,next)=>{
          ' (select  fecha,FLOOR((DayOfMonth(fecha)-1)/7)+1  as  SEMANA,SUM(programa) as META_GESTION,SUM(entregado) as ENTREGADOS , SUM(entregado) -  SUM(programa) as RESULTADO from monitor_gestion where fecha between ?  and ? group by 2)a;'
   
     
-        conexion.query(sql
-        ,[firstDay,lastDay,firstDay,lastDay],  (error, results)=>{
+        conexion.query(sql,[firstDay,lastDay,firstDay,lastDay],  (error, results)=>{
             if(!results){; return next()}
             req.metas = results ; 
             return next()
@@ -460,6 +459,40 @@ exports.crearpdf = async (req,res)=>{
          return 'OK';
        });
        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.demandados = async (req,res)=>{
+    try {
+        const fecex = req.body.fechaexcusa;
+        const fecex2 = req.body.fechaexcusa2;
+        const fecabo = req.body.fechaabono;
+        const fecabo2 = req.body.fechaabono2;
+        const docu = req.body.documentox;
+       
+ 
+
+        //console.log(fecex+fecex2+fecabo+fecabo2+docu);
+        if(isEmpty(fecex) || isEmpty(fecex2)  ){
+            res.send("VACIO");
+        }else{
+            let sql = 'select RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+            '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from monitor_priorizador where  FEC_EXCUSA BETWEEN ? and ?  and DOCUMENTO IN ( ? )  '  +
+            ' and UBICABILIDAD NOT  IN("Inubicable","Fallecido") ' +
+            ' and FECHA_ULT_ABONO BETWEEN  ? and ? order by rut asc  ;'
+         
+            conexion.query(sql,[fecex,fecex2,docu,fecabo,fecabo2],  (error, results)=>{
+               if(results){
+            
+                res.send(results);
+        
+               }
+           }) 
+
+          
+        }
     } catch (error) {
         console.log(error)
     }

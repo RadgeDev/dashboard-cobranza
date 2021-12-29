@@ -35,6 +35,12 @@ router.get('/mcobrador',authController.isAuthenticated,authController.showcobrad
 })
 
 
+router.get('/priorizador',authController.isAuthenticated,(req,res)=>{
+  res.render('priorizador_demandas',{user:req.usuario,alert:false})
+
+})
+
+
 
 router.get('/registro',authController.isAuthenticated,(req,res)=>{
   res.render('registro')
@@ -64,6 +70,7 @@ router.post('/crearpdf',authController.crearpdf)
 router.post('/resumen_cobrador',authController.resumen_cobrador)
 router.post('/cobradoresultado',authController.cobradoresultado)
 router.post('/metacobradorgeneral',authController.metacobradorgeneral)
+router.post('/demandados',authController.demandados)
 router.get('/Descargapdf', (req, res) => {
   res.download('/root/cobranza_cyd/pdf/archivo/repacta.pdf');
 });

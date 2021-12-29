@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>CYD Cobranza</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Free Datta Able Admin Template come up with latest Bootstrap 4 framework with basic components, form elements and lots of pre-made layout options" />
+    <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template"/>
+    <meta name="author" content="CodedThemes"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="dashboard/assets/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="dashboard/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="dashboard/assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="dashboard/assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .modal-body {
+                overflow : auto;
+                }
+    </style>
+  
+  
+</head>
+
+<body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+    <!-- [ navigation menu ] start -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a href="/" class="b-brand">
+                    <div class="b-bg">
+                        <i class="feather icon-trending-up"></i>
+                    </div>
+                    <span class="b-title">CYD Cobranza</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Navigation</label>
+                    </li>
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item ">
+                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Principal</span></a>
+                    </li>
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item ">
+                        <a href="/historico" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Recaudacion Historica</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>UI Cobradores</label>
+                    </li>
+                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Gestion Cobradores</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/mcobrador" class="">Metas Excusas Cobradores</a></li>
+                        <!--       <li class=""><a href="bc_badges.html" class="">Badges</a></li>
+                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">Breadcrumb & paggination</a></li>
+                            <li class=""><a href="bc_collapse.html" class="">Collapse</a></li>
+                            <li class=""><a href="bc_tabs.html" class="">Tabs & pills</a></li>
+                            <li class=""><a href="bc_typography.html" class="">Typography</a></li>
+                            <li class=""><a href="icon-feather.html" class="">Feather<span class="pcoded-badge label label-danger">NEW</span></a></li>-->
+                        </ul> 
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>UI Front</label>
+                    </li>
+                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Herramientas de Ayuda</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/tramo" class="">Cambiar Tramo Cliente</a></li>
+                        <!--       <li class=""><a href="bc_badges.html" class="">Badges</a></li>
+                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">Breadcrumb & paggination</a></li>
+                            <li class=""><a href="bc_collapse.html" class="">Collapse</a></li>
+                            <li class=""><a href="bc_tabs.html" class="">Tabs & pills</a></li>
+                            <li class=""><a href="bc_typography.html" class="">Typography</a></li>
+                            <li class=""><a href="icon-feather.html" class="">Feather<span class="pcoded-badge label label-danger">NEW</span></a></li>-->
+                        </ul> 
+                    </li>
+                    
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Otros</label>
+                    </li>
+                    <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
+                       <!-- <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Elementos de formulario</span></a>-->
+                    </li>
+                    <li data-username="Table bootstrap datatable footable" class="nav-item">
+                        <a href="tbl_bootstrap.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Datos</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Estadistica</label>
+                    </li>
+                 <li data-username="Charts Morris" class="nav-item"><a href="chart-morris.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Estadistica</span></a></li>
+                    <li data-username="Maps Google" class="nav-item"><a href="map-google.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Ayuda</span></a></li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Pages</label>
+                    </li>
+                    <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Registrar Usuario</span></a>
+                        <ul class="pcoded-submenu">
+                         <!--   <li class=""><a href="auth-signup.html" class="" target="_blank">Sign up</a></li>-->
+                            <li class=""><a href="/registro" class="" target="_blank">Ingreso Usuario</a></li>  
+                        </ul>
+                    </li>
+                    <li data-username="Sample Page" class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Pagina Simple</span></a></li>
+                    <li data-username="Disabled Menu" class="nav-item disabled"><a href="javascript:" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">deshabilitar menu</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- [ navigation menu ] end -->
+
+    <!-- [ Header ] start -->
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
+            <a href="index.html" class="b-brand">
+                   <div class="b-bg">
+                       <i class="feather icon-trending-up"></i>
+                   </div>
+                   <span class="b-title">CYD Cobranza</span>
+               </a>
+        </div>
+        <a class="mobile-menu" id="mobile-header" href="javascript:">
+            <i class="feather icon-more-horizontal"></i>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown">Datos</a>
+                  <!--  <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:">Action</a></li>
+                        <li><a class="dropdown-item" href="javascript:">Another action</a></li>
+                        <li><a class="dropdown-item" href="javascript:">Something else here</a></li> 
+                    </ul>-->
+                </li>
+                <li class="nav-item">
+                    <div class="main-search">
+                        <div class="input-group">
+                            <input type="text" id="m-search" class="form-control" placeholder="Search . . .">
+                            <a href="javascript:" class="input-group-append search-close">
+                                <i class="feather icon-x input-group-text"></i>
+                            </a>
+                            <span class="input-group-append search-btn btn btn-primary">
+                                <i class="feather icon-search input-group-text"></i>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right notification">
+                            <div class="noti-head">
+                                <h6 class="d-inline-block m-b-0">Notifications</h6>
+                                <div class="float-right">
+                                    <a href="javascript:" class="m-r-10">mark as read</a>
+                                    <a href="javascript:">clear all</a>
+                                </div>
+                            </div>
+                            <ul class="noti-body">
+                                <li class="n-title">
+                                    <p class="m-b-0">NEW</p>
+                                </li>
+                              <!-- <li class="notification">
+                                    <div class="media">
+                                        <img class="img-radius" src="dashboard/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                            <p>New ticket Added</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="n-title">
+                                    <p class="m-b-0">EARLIER</p>
+                                </li>
+                                <li class="notification">
+                                    <div class="media">
+                                        <img class="img-radius" src="dashboard/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                            <p>Prchace New Theme and make payment</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="media">
+                                        <img class="img-radius" src="dashboard/assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                            <p>currently login</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>-->
+                            <div class="noti-footer"> 
+                                <a href="javascript:">show all</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon feather icon-settings"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <div class="pro-head">
+                                <img src="dashboard/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+
+                                 <% if (user) { %><span><%= user.usuario %></span> <% } %>
+                                <a href="logout" class="dud-logout" title="Logout">
+                                    <i class="feather icon-log-out"></i>
+                                </a>
+                            </div>
+                            <ul class="pro-body">
+                                <li><a href="javascript:" class="dropdown-item"><i class="feather icon-settings"></i> Configuracion</a></li>
+                                <li><a href="javascript:" class="dropdown-item"><i class="feather icon-user"></i> Perfil</a></li>
+                               <!--<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>--> 
+                                <li><a href="logout" class="dropdown-item"><i class="feather icon-lock"></i> Cerrar sesion</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- [ Header ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card Recent-Users">
+                                                 <div class="card-header">
+                                                    <h5 id="titulo">Priorizador de Demandas</h5>
+                                                 </div>
+                                        <div class="card-block px-0 py-3 ">
+                                            <div class="card-block px-0 py-3 ">
+                                       
+                                                <table class="table col-xl-12 col-md-6">
+                                                    <thead>
+                                                          <tr>
+                                                           <th scope="col">Filtros</th>
+                                                           <th scope="col">Buscar</th>
+                                                 
+                                      
+                                                           </tr>
+                                                    </thead>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td>    
+                                                                <select class="form-control" id="filtro" onchange="getval(this);" >
+                                                                <option value="" selected disabled hidden>Eliga un Filtro</option>
+                                                                <option value="Demandas" >Demandados </option>
+                                                                <option value="Seguimiento">Seguimiento</option>
+                                                                <option value="Redemanda">Redemandar Mayor 180 dias</option>
+                                                                <option value="Demantat11">Demandas T11 u Otras</option>
+                                                                <option value="Terreno">Carta Terreno</option>
+                                                                <option value="Correo">Carta Correo</option>
+                                                                </select></td>
+                                                                <td>   <button  type="button" id="buscar" class="btn btn-primary ">Buscar Demandas </button></td>
+                                                             
+                                                          </tr>
+                                                        
+                                                      </tbody>
+                                          </table>
+                                                <table class="table col-xl-12 col-md-6">
+                                                          <thead>
+                                                                <tr>
+                                                                 <th scope="col">Fecha Inicio Excusas</th>
+                                                                 <th scope="col">Fecha Termino Excusas </th>
+                                                                 <th scope="col">Fecha Inicio Abonos</th>
+                                                                 <th scope="col">Fecha Termino Abonos</th>
+                                                 
+                                            
+                                                                 </tr>
+                                                          </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td> <input  class="form-control"  type='date'  id="fecha_excusa"></td>
+                                                                    <td> <input  class="form-control"  type='date'  id="fecha_excusa2"> </td>
+                                                                    <td> <input  class="form-control"  type='date'  id="fecha_abono"></td>
+                                                                    <td> <input  class="form-control"  type='date'  id="fecha_abono2"> </td>
+                                                                   
+                                                                </tr>
+                                                            </tbody>
+                                                </table>
+                                                <table class="table col-xl-12 col-md-6">
+                                                    <thead>
+                                                          <tr>
+        
+                                                           <th scope="col">Capital Minimo</th>
+                                                           <th scope="col">Capital Maximo</th>
+                                                           <th scope="col">Tipo Documento </th>
+                                                           <th scope="col">Sector</th>
+                                                
+                          
+                          
+                                                           </tr>
+                                                    </thead>
+                                                      <tbody>
+                                                          <tr>
+                                                             
+                                                                <td><input id= "capmin" class="form-control" type="text"></td>
+                                                                <td><input id= "capmax"  class="form-control" type="text"></td>
+                                            
+                                                                <td>    
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox" id="rd_carta" name="documentoch" value="Carta">
+                                                                        <label class="form-check-label" for="inlineCheckbox1">Carta</label>
+                                                                      </div>
+                                                                      <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox" id="rd_demanda" name = "documentoch" value="Demanda">
+                                                                        <label class="form-check-label" for="inlineCheckbox2">Demanda</label>
+                                                                      </div>
+                                                                      <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox" id="rd_reimpresion" name ="documentoch" value="Reimpresion">
+                                                                        <label class="form-check-label" for="inlineCheckbox1">Reimpresion</label>
+                                                                      </div>
+                                                                      <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="checkbox" id="rd_otro" name ="documentoch" value="Otro">
+                                                                        <label class="form-check-label" for="inlineCheckbox2">Otro</label>
+                                                                      </div>
+                                                                </td>
+                                                                <td>
+                                                                     <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="sector" id="rd1_urbano" value="option1">
+                                                                        <label class="form-check-label" for="inlineRadio1">Urbano</label>
+                                                                        </div>
+                                                                      <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="sector" id="rd2_rural" value="option2">
+                                                                        <label class="form-check-label" for="inlineRadio1">Rutal</label>
+                                                                      </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="sector" id="rd3_ambos" value="option3">
+                                                                        <label class="form-check-label" for="inlineRadio1">Ambos</label>
+                                                                      </div>
+                                                                </td>
+                                                              
+        
+                                                          </tr>
+                                                      </tbody>
+                                          </table>
+                                            <table id='tablalocalidad' class="table col-xl-12 col-md-6">
+                                                <thead>
+                                                  <tr>
+
+                                                   <th scope="col">Localidades</th>
+                                
+                                                   </tr>
+                                                </thead>
+                                              <tbody>
+                                                  <tr>
+                                                     
+                                                        <td >
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_sanfernando" name="localidadx" value="San Fernando">
+                                                                <label class="form-check-label" for="inlineCheckbox1">San Fernando</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_chimbarongo" name="localidadx" value="Chimbarongo">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Chimbarongo</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_santacruz" name="localidadx" value="Santa Cruz">
+                                                                <label class="form-check-label" for="inlineCheckbox1">Santa Cruz</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_sanvicente" name="localidadx" value="San Vicente">
+                                                                <label class="form-check-label" for="inlineCheckbox2">San Vicente</label>
+                                                              </div>
+
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_rengo" name="localidadx" value="Rengo">
+                                                                <label class="form-check-label" for="inlineCheckbox1">Rengo</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_pichilemu" name="localidadx" value="Pichilemu">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Pichilemu</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_cabras" name="localidadx" value="Las Cabras" >
+                                                                <label class="form-check-label" for="inlineCheckbox1">Las Cabras</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox"  id="ch_peumo" name="localidadx" value="Peumo">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Peumo</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_pichidegua" name="localidadx" value="Pichidegua">
+                                                                <label class="form-check-label" for="inlineCheckbox1">Pichidegua</label>
+                                                              </div>
+                                                              <br>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_nancagua" name="localidadx" value="Nancagua">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Nancagua</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_lolol" name="localidadx" value="Lolol">
+                                                                <label class="form-check-label" for="inlineCheckbox1">Lolol</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_palmilla" name="localidadx" value="Palmilla">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Palmilla</label>
+                                                              </div>
+
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_peralillo" name="localidadx" value="Peralillo">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Peralillo</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_marchihue" name="localidadx" value="Marchihue">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Marchihue</label>
+                                                              </div>
+
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_marchigue" name="localidadx" value="Marchigue">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Marchigue</label>
+                                                              </div>
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_estrella" name="localidadx" value="Las Estrella">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Las Estrella</label>
+                                                              </div>
+
+                                                              <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" id="ch_paredones" name="localidadx" value="Paredones">
+                                                                <label class="form-check-label" for="inlineCheckbox2">Paredones</label>
+                                                              </div>
+
+                                                        </td>
+                                                        
+
+                                                  </tr>
+                                              </tbody>
+                                           </table>
+                                               
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                         
+                           
+  
+                                 <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" style="max-width: 90%;" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel"><span id="individuo">Resumen Cobrador:</span> </span> </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                   <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                                     <div class="modal-body">
+                                                        <div class="card-block px-0 py-3 table-scrollable">
+                                                            <table id ="resumen_individual" class="table table-striped">
+                                                                <thead class="thead-dark">
+                                                                  <tr>
+                                                                    <th scope="col">FECHA</th>
+                                                                    <th scope="col">COBRADOR</th>
+                                                                    <th scope="col">META</th>
+                                                                    <th scope="col">ENTREGA</th>
+                                                                    <th scope="col">RESULTADO</th>
+                                                                
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody id= "tbodyexcusas">
+                                                        
+                                                                </tbody>
+                                                            </table>
+                                                                
+                                                        </div>
+                                                    </div>
+                                           <div class="modal-footer">
+                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                           <button  type="button" id="excelcobrador" class="btn btn-primary ">Exportar Excel</button>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               <!-- FIN MODAL-->
+           
+                    
+                                <!--[ year  sales section ] end-->
+                                <!--[ Recent Users ] start-->
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card Recent-Users">
+                                        <div class="card-header">
+                                            <table  class="table col-xl-12 col-md-6">
+                                         
+                                                <tbody>
+                                                <td>Gestion a Priorizar</td>
+                                                <td>Cantidad registros: <span id ="cantidad"> </span> </td>
+                                                <td><button  type="button" id="global" class="btn btn-primary ">Exportar Excel</button></td>
+                                                </tbody>
+                                            </table>
+                                          
+                                         
+                                        </div>
+                                        <div class="card-block px-0 py-3 ">
+                                            <div class="card-block px-0 py-3 table-scrollable">
+            
+                                                <table id ="tabla_priorizar" class="table table-striped">
+                                                <thead class="thead-dark">
+                                                  <tr>
+                                                    <th scope="col">RUT</th>
+                                                    <th scope="col">CAPITAL</th>
+                                                    <th scope="col">FEC_EXCUSA</th>
+                                                    <th scope="col">UBICABILIDAD</th>
+                                                    <th scope="col">DOCUMENTO</th>
+                                                    <th scope="col">LOCALIDAD</th>
+                                                    <th scope="col">SECTOR</th>
+                                                    <th scope="col">DEMANDA_ACTIVA</th>
+                                                    <th scope="col">FECHA_DEMANDA</th>
+                                                    <th scope="col">DOCUMENTO_SUGERIDO</th>
+                                                    <th scope="col">FECHA_ULT_ABONO</th>
+                                                    <th scope="col">TRAMO</th>
+                                                    <th scope="col">FECHA_CAIDA</th>
+                                                
+                                                  </tr>
+                                                </thead>
+                                                       <tbody id= "tbodyresumen">
+                                          
+                                            
+                                                        </tbody>
+                                              </table>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--[ Recent Users ] end-->
+
+                                <!-- [ statistics year chart ] start -->
+                                
+                       
+                                <!-- [ statistics year chart ] end -->
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 11]>
+        <div class="ie-warning">
+            <h1>Warning!!</h1>
+            <p>You are using an outdated version of Internet Explorer, please upgrade
+               <br/>to any of the following web browsers to access this website.
+            </p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="dashboard/assets/images/browser/chrome.png" alt="Chrome">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="dashboard/assets/images/browser/firefox.png" alt="Firefox">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="dashboard/assets/images/browser/opera.png" alt="Opera">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="dashboard/assets/images/browser/safari.png" alt="Safari">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="dashboard/assets/images/browser/ie.png" alt="">
+                            <div>IE (11 & above)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>Sorry for the inconvenience!</p>
+        </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+     
+
+    <!-- Required Js -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="dashboard/assets/js/vendor-all.min.js"></script>
+	<script src="dashboard/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="dashboard/assets/js/pcoded.min.js"></script>
+    <!-- Include Bootstrap Datepicker -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="dashboard/assets/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://rawgit.com/unconditional/jquery-table2excel/master/src/jquery.table2excel.js"></script>
+    <script src="dashboard/assets/js/table2excel.js"></script>
+ 
+ <script >
+
+$(document).ready(function(){
+   
+    
+    var date = new Date();
+    var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+   
+
+});
+
+function getval(sel)
+{
+ var filtrox = sel.value;
+ switch (filtrox) {
+
+  case 'Demandas':
+     //inicio excusa
+     $('#fecha_excusa').val(fechax(60));
+     $('#fecha_excusa2').val(fechax(15));
+     //inicio demanda
+     $('#fecha_abono').val("2001-01-01");
+     $('#fecha_abono2').val(fechax(30));
+
+    //capital
+    $('#capmin').prop('readonly', true);
+    $('#capmax').prop('readonly', true);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("disabled",true);
+    $('input[name=rd2_rural]').attr("disabled",true);
+    $('input[name=rd3_ambos]').attr("disabled",true);
+   //documento
+    $('#rd_carta').attr("disabled",true);
+    $('#rd_demanda').attr("enabled",true);
+    $('#rd_demanda').attr("checked",true);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('disabled','true');
+
+    break;
+
+  case 'Seguimiento':
+   //capital
+    $('#capmin').prop('readonly', true);
+    $('#capmax').prop('readonly', true);
+    //radiobuton sectores
+    $('#rd1_urbano').attr("disabled",true);
+    $('#rd2_rural').attr("disabled",true);
+    $('#rd3_ambos').attr("disabled",true);
+   //documento
+    $('#rd_carta').attr("enabled",true);
+    $('#rd_carta').attr("checked",true);
+    $('#rd_demanda').attr("enabled",true);
+    $('#rd_demanda').attr("checked",true);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('disabled','true');
+
+    break;
+
+  case 'Redemanda':
+
+   //fecha excusa
+   var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    var today = now.getFullYear() + '/' + month + '/' + day;
+    $('#fecha_excusa').val(today);
+
+
+    //capital
+    $('#capmin').prop('readonly', true);
+    $('#capmax').prop('readonly', true);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("disabled",true);
+    $('input[name=rd2_rural]').attr("disabled",true);
+    $('input[name=rd3_ambos]').attr("disabled",true);
+   //documento
+    $('#rd_carta').attr("disabled",true);
+    $('#rd_carta').attr("checked",false);
+    $('#rd_demanda').attr("disabled",true);
+    $('#rd_demanda').attr("checked",false);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('disabled','true');
+    break;
+
+    case 'Demantat11':
+    //capital
+    $('#capmin').prop('readonly', false);
+    $('#capmax').prop('readonly', false);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("enabled",true);
+    $('input[name=rd1_urbano]').attr("checked",true);
+    $('input[name=rd2_rural]').attr("enabled",true);
+    $('input[name=rd3_ambos]').attr("enabled",true);
+   //documento
+    $('#rd_carta').attr("disabled",true);
+    $('#rd_carta').attr("checked",false);
+    $('#rd_demanda').attr("disabled",true);
+    $('#rd_demanda').attr("checked",false);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
+    $('#ch_sanfernando').attr("checked",true);
+    $('#ch_chimbarongo').attr("checked",true);
+    break;
+
+    case 'Terreno':
+    //capital
+    $('#capmin').prop('readonly', false);
+    $('#capmax').prop('readonly', false);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("enabled",true);
+    $('input[name=rd1_urbano]').attr("checked",true);
+    $('input[name=rd2_rural]').attr("enabled",true);
+    $('input[name=rd3_ambos]').attr("enabled",true);
+   //documento
+    $('#rd_carta').attr("disabled",true);
+    $('#rd_carta').attr("checked",false);
+    $('#rd_demanda').attr("disabled",false);
+    $('#rd_demanda').attr("checked",true);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
+    $('#ch_sanfernando').attr("checked",true);
+    $('#ch_chimbarongo').attr("checked",true);
+    break;
+
+
+    case 'Terreno':
+    //capital
+    $('#capmin').prop('readonly', false);
+    $('#capmax').prop('readonly', false);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("disabled",false);
+    $('input[name=rd1_urbano]').attr("checked",true);
+    $('input[name=rd2_rural]').attr("disabled",false);
+    $('input[name=rd3_ambos]').attr("disabled",false);
+   //documento
+    $('#rd_carta').attr("disabled",true);
+    $('#rd_carta').attr("checked",false);
+    $('#rd_demanda').attr("disabled",false);
+    $('#rd_demanda').attr("checked",true);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
+    $('#ch_sanfernando').attr("checked",true);
+    $('#ch_chimbarongo').attr("checked",true);
+    break;
+
+    case 'Correo':
+    //capital
+    $('#capmin').prop('readonly', false);
+    $('#capmax').prop('readonly', false);
+    //radiobuton sectores
+    $('input[name=rd1_urbano]').attr("disabled",false);
+    $('input[name=rd1_urbano]').attr("checked",true);
+    $('input[name=rd2_rural]').attr("disabled",false);
+    $('input[name=rd3_ambos]').attr("disabled",false);
+   //documento
+    $('#rd_carta').attr("disabled",false);
+    $('#rd_carta').attr("checked",true);
+    $('#rd_demanda').attr("disabled",true);
+    $('#rd_demanda').attr("checked",false);
+    $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_reimpresion').attr("checked",false);
+    $('#rd_otro').attr("disabled",true);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
+    $('#ch_sanfernando').attr("checked",true);
+    $('#ch_chimbarongo').attr("checked",true);
+    break;
+
+
+   default:
+    //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+    break;
+
+}
+}
+
+function fechax( dias ) {
+    //fecha menos dias 
+    var now = new Date();
+    now.setDate(now.getDate() - dias);
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    var today = now.getFullYear() + '-' + month + '-' + day;
+
+    return today
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    $('#global').on('click', function(e){
+        e.preventDefault();
+        ResultsToTable3();
+    });
+    
+    function ResultsToTable3(){    
+        $("#tabla_priorizar").table2excel({
+            exclude: ".noExl",
+            name: "MetaMensual",
+            filename : "Priorizador" + Get_date() + "",
+            fileext:".xls",
+        });
+    }
+
+
+$("#buscar").click(function(e) {
+
+         /*   var loca = [];
+            $.each($("input[name='localidadx']:checked"), function(){            
+                loca.push($(this).val());
+            });
+
+            var localidad = "'" + loca.join("','") + "'" ; */
+            e.preventDefault();
+            var documento = [];
+            $.each($("input[name='documentoch']:checked"), function(){            
+                documento.push($(this).val());
+            });
+
+            
+            
+
+            var fechaex =   $("#fecha_excusa").val();
+            var fechaex2 =  $("#fecha_excusa2").val();
+
+            var fechaabo =   $("#fecha_abono").val();
+            var fechaabo2 =  $("#fecha_abono2").val();
+
+        $.ajax({
+
+        type: "POST",
+        url: "/demandados",
+        data: { 
+            fechaexcusa: fechaex,
+            fechaexcusa2: fechaex2,
+            fechaabono: fechaabo ,
+            fechaabono2: fechaabo2,
+            documentox: documento
+        },
+        success: function(data) {
+
+            if(data == "VACIO"){
+
+              console.log('vacio');
+
+            }
+          else{
+                console.log(data);
+                $("#tbodyresumen").empty();
+                var jsonrecept = JSON.stringify(data);
+                var jsondata=$.parseJSON(jsonrecept);
+                $.each(jsondata, function(i, d) {
+                var row='<tr>';
+                $.each(d, function(j, e) {
+                row+='<td>'+e+'</td>';
+                });
+                row+='</tr>';
+                $('#tabla_priorizar tbody').append(row);
+
+                });
+                 
+                var nFilas = $("#tabla_priorizar tr").length;
+                $("#cantidad").html(nFilas);
+
+
+            }
+        }
+    });
+
+    
+
+
+ });
+
+
+
+
+
+
+
+ function Get_date(){
+        var currentdate = new Date(); 
+    var datetime = "_" + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "_"  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+        return datetime
+    }
+    
+
+
+function addYears(num){
+  var currYear = new Date().getFullYear();
+  var currMonth = new Date().getMonth();
+  return new Date(currYear+num, currMonth, 1);
+}
+
+
+
+
+ </script>
+
+</body>￼
+</html>

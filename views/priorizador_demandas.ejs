@@ -284,7 +284,7 @@
                                                               <td>    
                                                                 <select class="form-control" id="filtro" onchange="getval(this);" >
                                                                 <option value="" selected disabled hidden>Eliga un Filtro</option>
-                                                                <option value="Demandas" >Demandados </option>
+                                                                <option value="Demandas" >Demandados</option>
                                                                 <option value="Seguimiento">Seguimiento</option>
                                                                 <option value="Redemanda">Redemandar Mayor 180 dias</option>
                                                                 <option value="Demantat11">Demandas T11 u Otras</option>
@@ -364,10 +364,7 @@
                                                                         <input class="form-check-input" type="radio" name="sector" id="rd2_rural" value="option2">
                                                                         <label class="form-check-label" for="inlineRadio1">Rutal</label>
                                                                       </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="radio" name="sector" id="rd3_ambos" value="option3">
-                                                                        <label class="form-check-label" for="inlineRadio1">Ambos</label>
-                                                                      </div>
+                                                                      
                                                                 </td>
                                                               
         
@@ -653,9 +650,14 @@ $(document).ready(function(){
 
 });
 
+
+
+
+
 function getval(sel)
 {
  var filtrox = sel.value;
+ limpiar();
  switch (filtrox) {
 
   case 'Demandas':
@@ -672,7 +674,7 @@ function getval(sel)
     //radiobuton sectores
     $('input[name=rd1_urbano]').attr("disabled",true);
     $('input[name=rd2_rural]').attr("disabled",true);
-    $('input[name=rd3_ambos]').attr("disabled",true);
+
    //documento
     $('#rd_carta').attr("disabled",true);
     $('#rd_demanda').attr("enabled",true);
@@ -685,18 +687,25 @@ function getval(sel)
     break;
 
   case 'Seguimiento':
+    
+    //inicio excusa
+    $('#fecha_excusa').val(fechax(45));
+    $('#fecha_excusa2').val(fechax(15));
+    //inicio demanda
+    $('#fecha_abono').val("2001-01-01");
+    $('#fecha_abono2').val(fechax(30));
    //capital
     $('#capmin').prop('readonly', true);
     $('#capmax').prop('readonly', true);
     //radiobuton sectores
     $('#rd1_urbano').attr("disabled",true);
     $('#rd2_rural').attr("disabled",true);
-    $('#rd3_ambos').attr("disabled",true);
+
    //documento
-    $('#rd_carta').attr("enabled",true);
     $('#rd_carta').attr("checked",true);
-    $('#rd_demanda').attr("enabled",true);
+    $('#rd_carta').attr("disabled",false);
     $('#rd_demanda').attr("checked",true);
+    $('#rd_demanda').attr("disabled",false);
     $('#rd_reimpresion').attr("disabled",true);
     $('#rd_otro').attr("disabled",true);
     //tabla localidad
@@ -706,67 +715,65 @@ function getval(sel)
 
   case 'Redemanda':
 
-   //fecha excusa
-   var now = new Date();
-    var month = (now.getMonth() + 1);               
-    var day = now.getDate();
-    if (month < 10) 
-        month = "0" + month;
-    if (day < 10) 
-        day = "0" + day;
-    var today = now.getFullYear() + '/' + month + '/' + day;
-    $('#fecha_excusa').val(today);
+     //inicio excusa
+     $('#fecha_excusa').val("2014-01-01");
+     $('#fecha_excusa2').val(fechax(30));
+     //inicio demanda
+     $('#fecha_abono').val("2014-01-01");
+     $('#fecha_abono2').val(fechax(30));
 
 
     //capital
+    $('#capmin').val("");
+    $('#capmax').val("");
     $('#capmin').prop('readonly', true);
     $('#capmax').prop('readonly', true);
+
     //radiobuton sectores
-    $('input[name=rd1_urbano]').attr("disabled",true);
-    $('input[name=rd2_rural]').attr("disabled",true);
-    $('input[name=rd3_ambos]').attr("disabled",true);
+    $("#rd1_urbano").prop("checked", false);
+    $("#rd1_urbano").attr("disabled", true);
+    $("#rd2_rural").prop("checked", false);
+    $("#rd2_rural").attr("disabled", true);
+ 
    //documento
     $('#rd_carta').attr("disabled",true);
     $('#rd_carta').attr("checked",false);
     $('#rd_demanda').attr("disabled",true);
     $('#rd_demanda').attr("checked",false);
     $('#rd_reimpresion').attr("disabled",true);
+    $('#rd_reimpresion').attr("checked",false);
     $('#rd_otro').attr("disabled",true);
+    $('#rd_otro').attr("checked",false);
     //tabla localidad
     $('table#tablalocalidad input[type=checkbox]').attr('disabled','true');
     break;
 
     case 'Demantat11':
-    //capital
-    $('#capmin').prop('readonly', false);
-    $('#capmax').prop('readonly', false);
-    //radiobuton sectores
-    $('input[name=rd1_urbano]').attr("enabled",true);
-    $('input[name=rd1_urbano]').attr("checked",true);
-    $('input[name=rd2_rural]').attr("enabled",true);
-    $('input[name=rd3_ambos]').attr("enabled",true);
-   //documento
-    $('#rd_carta').attr("disabled",true);
-    $('#rd_carta').attr("checked",false);
-    $('#rd_demanda').attr("disabled",true);
-    $('#rd_demanda').attr("checked",false);
-    $('#rd_reimpresion').attr("disabled",true);
-    $('#rd_otro').attr("disabled",true);
-    //tabla localidad
-    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
-    $('#ch_sanfernando').attr("checked",true);
-    $('#ch_chimbarongo').attr("checked",true);
-    break;
 
-    case 'Terreno':
+
+    //inicio excusa
+    $('#fecha_excusa').val("");
+    $('#fecha_excusa2').val("");
+    $('#fecha_excusa').prop('readonly', true);
+    $('#fecha_excusa2').prop('readonly', true);
+     //inicio demanda
+    $('#fecha_abono').val("2014-01-01");
+    $('#fecha_abono2').val(fechax(30));
+
+
     //capital
+    $('#capmin').val("0");
+    $('#capmax').val("500000");
     $('#capmin').prop('readonly', false);
     $('#capmax').prop('readonly', false);
+
     //radiobuton sectores
-    $('input[name=rd1_urbano]').attr("enabled",true);
-    $('input[name=rd1_urbano]').attr("checked",true);
-    $('input[name=rd2_rural]').attr("enabled",true);
-    $('input[name=rd3_ambos]').attr("enabled",true);
+    $("#rd1_urbano").prop("checked", true);
+    $("#rd1_urbano").attr("disabled", false);
+    $("#rd2_rural").prop("checked", false);
+    $("#rd2_rural").attr("disabled", false);
+
+ 
    //documento
     $('#rd_carta').attr("disabled",true);
     $('#rd_carta').attr("checked",false);
@@ -775,21 +782,37 @@ function getval(sel)
     $('#rd_reimpresion').attr("disabled",true);
     $('#rd_otro').attr("disabled",true);
     //tabla localidad
-    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
-    $('#ch_sanfernando').attr("checked",true);
-    $('#ch_chimbarongo').attr("checked",true);
+    $('table#tablalocalidad input[type=checkbox]').prop('disabled', false);
+    $("#ch_sanfernando").prop("checked", true);
+    $("#ch_chimbarongo").prop("checked", true);
+
     break;
 
-
+   
     case 'Terreno':
+    //inicio excusa
+    $('#fecha_excusa').val("");
+    $('#fecha_excusa2').val("");
+    $('#fecha_excusa').prop('readonly', true);
+    $('#fecha_excusa2').prop('readonly', true);
+     //inicio demanda
+    $('#fecha_abono').val("2014-01-01");
+    $('#fecha_abono2').val(fechax(30));
+
+
     //capital
+    $('#capmin').val("50000");
+    $('#capmax').val("5000000");
     $('#capmin').prop('readonly', false);
     $('#capmax').prop('readonly', false);
+
     //radiobuton sectores
-    $('input[name=rd1_urbano]').attr("disabled",false);
-    $('input[name=rd1_urbano]').attr("checked",true);
-    $('input[name=rd2_rural]').attr("disabled",false);
-    $('input[name=rd3_ambos]').attr("disabled",false);
+    $("#rd1_urbano").prop("checked", true);
+    $("#rd1_urbano").attr("disabled", false);
+    $("#rd2_rural").prop("checked", false);
+    $("#rd2_rural").attr("disabled", false);
+
+ 
    //documento
     $('#rd_carta').attr("disabled",true);
     $('#rd_carta').attr("checked",false);
@@ -798,32 +821,51 @@ function getval(sel)
     $('#rd_reimpresion').attr("disabled",true);
     $('#rd_otro').attr("disabled",true);
     //tabla localidad
-    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
-    $('#ch_sanfernando').attr("checked",true);
-    $('#ch_chimbarongo').attr("checked",true);
+    $('table#tablalocalidad input[type=checkbox]').prop('disabled', false);
+    $("#ch_sanfernando").prop("checked", true);
+    $("#ch_chimbarongo").prop("checked", true);
+    $("#ch_santacruz").prop("checked", true);
+    $("#ch_sanvicente").prop("checked", true);
     break;
+
 
     case 'Correo':
+    //inicio excusa
+    $('#fecha_excusa').val("");
+    $('#fecha_excusa2').val("");
+    $('#fecha_excusa').prop('readonly', true);
+    $('#fecha_excusa2').prop('readonly', true);
+     //inicio demanda
+    $('#fecha_abono').val("2014-01-01");
+    $('#fecha_abono2').val(fechax(30));
+
+
     //capital
+    $('#capmin').val("0");
+    $('#capmax').val("50000");
     $('#capmin').prop('readonly', false);
     $('#capmax').prop('readonly', false);
+
     //radiobuton sectores
-    $('input[name=rd1_urbano]').attr("disabled",false);
-    $('input[name=rd1_urbano]').attr("checked",true);
-    $('input[name=rd2_rural]').attr("disabled",false);
-    $('input[name=rd3_ambos]').attr("disabled",false);
+    $("#rd1_urbano").prop("checked", true);
+    $("#rd1_urbano").attr("disabled", false);
+    $("#rd2_rural").prop("checked", false);
+    $("#rd2_rural").attr("disabled", false);
+
+ 
    //documento
     $('#rd_carta').attr("disabled",false);
     $('#rd_carta').attr("checked",true);
     $('#rd_demanda').attr("disabled",true);
     $('#rd_demanda').attr("checked",false);
     $('#rd_reimpresion').attr("disabled",true);
-    $('#rd_reimpresion').attr("checked",false);
     $('#rd_otro').attr("disabled",true);
     //tabla localidad
-    $('table#tablalocalidad input[type=checkbox]').attr('enabled','true');
-    $('#ch_sanfernando').attr("checked",true);
-    $('#ch_chimbarongo').attr("checked",true);
+    $('table#tablalocalidad input[type=checkbox]').prop('disabled', false);
+    $("#ch_sanfernando").prop("checked", true);
+    $("#ch_chimbarongo").prop("checked", true);
+    $("#ch_santacruz").prop("checked", true);
+    $("#ch_sanvicente").prop("checked", true);
     break;
 
 
@@ -833,6 +875,51 @@ function getval(sel)
 
 }
 }
+
+
+function limpiar(){
+  //inicio excusa
+    $("#tbodyresumen").empty();
+    $('#fecha_excusa').val("");
+    $('#fecha_excusa2').val("");
+    $('#fecha_excusa').prop('readonly', false);
+    $('#fecha_excusa2').prop('readonly', false);
+
+    $('#fecha_abono').val("");
+    $('#fecha_abono2').val("");
+    $('#fecha_abono').prop('readonly', false);
+    $('#fecha_abono2').prop('readonly', false);
+
+    //capital
+    $('#capmin').val("");
+    $('#capmax').val("");
+    $('#capmin').prop('readonly', false);
+    $('#capmax').prop('readonly', false);
+
+    //radiobuton sectores
+    $("#rd1_urbano").prop("checked", false);
+    $("#rd1_urbano").attr("disabled", false);
+    $("#rd2_rural").prop("checked", false);
+    $("#rd2_rural").attr("disabled", false);
+
+ 
+   //documento
+    $('#rd_carta').attr("disabled",false);
+    $('#rd_carta').attr("checked",false);
+    $('#rd_demanda').attr("disabled",false);
+    $('#rd_demanda').attr("checked",false);
+    $('#rd_reimpresion').attr("disabled",false);
+    $('#rd_otro').attr("disabled",false);
+    //tabla localidad
+    $('table#tablalocalidad input[type=checkbox]').prop('disabled', false);
+    $("#ch_sanfernando").prop("checked", false);
+    $("#ch_chimbarongo").prop("checked", false);
+    $("#ch_santacruz").prop("checked", false);
+    $("#ch_sanvicente").prop("checked", false);
+
+
+}
+
 
 function fechax( dias ) {
     //fecha menos dias 
@@ -877,20 +964,33 @@ function fechax( dias ) {
 
 $("#buscar").click(function(e) {
 
-         /*   var loca = [];
+
+    e.preventDefault();
+
+            var loca = [];
             $.each($("input[name='localidadx']:checked"), function(){            
                 loca.push($(this).val());
             });
 
-            var localidad = "'" + loca.join("','") + "'" ; */
-            e.preventDefault();
             var documento = [];
             $.each($("input[name='documentoch']:checked"), function(){            
                 documento.push($(this).val());
             });
 
-            
-            
+            var sector = "";
+            if ($("#rd1_urbano").prop("checked") == true) {
+
+                sector = "URBANO";
+
+            }else{
+                 
+                sector = "RURAL";
+
+            }
+
+
+            var filtoxxx =  $('#filtro :selected').text();
+            console.log(filtoxxx);
 
             var fechaex =   $("#fecha_excusa").val();
             var fechaex2 =  $("#fecha_excusa2").val();
@@ -898,20 +998,29 @@ $("#buscar").click(function(e) {
             var fechaabo =   $("#fecha_abono").val();
             var fechaabo2 =  $("#fecha_abono2").val();
 
+            var capmin =   $("#capmin").val();
+            var capmax =  $("#capmax").val();
+
         $.ajax({
 
         type: "POST",
         url: "/demandados",
         data: { 
+            filtro:filtoxxx,
             fechaexcusa: fechaex,
             fechaexcusa2: fechaex2,
             fechaabono: fechaabo ,
             fechaabono2: fechaabo2,
-            documentox: documento
+            documentox: documento,
+            sector:sector,
+            localidad:loca,
+            capmin:capmin,
+            capmax:capmax
+
         },
         success: function(data) {
 
-            if(data == "VACIO"){
+            if(data == "VACIO" || data == "VACIOOP" ){
 
               console.log('vacio');
 

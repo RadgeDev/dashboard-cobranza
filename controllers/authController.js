@@ -465,34 +465,146 @@ exports.crearpdf = async (req,res)=>{
 }
 
 exports.demandados = async (req,res)=>{
+    
     try {
+        var filtrox = req.body.filtro;
         const fecex = req.body.fechaexcusa;
         const fecex2 = req.body.fechaexcusa2;
         const fecabo = req.body.fechaabono;
         const fecabo2 = req.body.fechaabono2;
         const docu = req.body.documentox;
-       
+        const loca = req.body.localidad;
+        const sector = req.body.sector;
+        const capmax = req.body.capmax;
+        const capmin = req.body.capmin;
+       // console.log(filtrox+docu + loca + sector + capmax + capmin);
+        let sql = "";
+  
  
+     
+       // console.log(filtrox+fecex+fecex2+fecabo+fecabo2+docu);
 
-        //console.log(fecex+fecex2+fecabo+fecabo2+docu);
-        if(isEmpty(fecex) || isEmpty(fecex2)  ){
-            res.send("VACIO");
-        }else{
-            let sql = 'select RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+        switch (filtrox) {
+          
+            case 'Demandados':
+                   
+            sql = 'select RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
             '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from monitor_priorizador where  FEC_EXCUSA BETWEEN ? and ?  and DOCUMENTO IN ( ? )  '  +
             ' and UBICABILIDAD NOT  IN("Inubicable","Fallecido") ' +
             ' and FECHA_ULT_ABONO BETWEEN  ? and ? order by rut asc  ;'
-         
+    
             conexion.query(sql,[fecex,fecex2,docu,fecabo,fecabo2],  (error, results)=>{
                if(results){
-            
+             //   console.log(results);
                 res.send(results);
         
                }
-           }) 
+                   }) 
+
+             
+            break;
+           
+            case 'Seguimiento':
+
+                sql = 'select RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+                '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from monitor_priorizador where  FEC_EXCUSA BETWEEN ? and ?  and DOCUMENTO IN ( ? )  '  +
+                ' and UBICABILIDAD NOT  IN("Inubicable","Fallecido","Bajo Puerta") ' +
+                ' and FECHA_ULT_ABONO BETWEEN  ? and ? order by rut asc  ;'
+             
+                conexion.query(sql,[fecex,fecex2,docu,fecabo,fecabo2],  (error, results)=>{
+                   if(results){
+                
+                    res.send(results);
+            
+                   }
+                   }) 
+            
+           
+               break;
+           
+               case 'Redemandar Mayor 180 dias':
+
+                sql = 'SELECT RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+                '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from monitor_priorizador  where  FECHA_DEMANDA > DATE_SUB(NOW(),interval 180 day)  and UBICABILIDAD NOT  IN("Inubicable","Fallecido") '  +
+                ' and FECHA_ULT_ABONO BETWEEN ? AND ?  and FEC_EXCUSA BETWEEN ? AND ? ;'
+               
+                conexion.query(sql,[fecex,fecex2,fecabo,fecabo2],  (error, results)=>{
+                   if(results){
+                
+                    res.send(results);
+            
+                   }
+                   }) 
+           
+               break;
+           
+             case 'Demandas T11 u Otras':
+             
+                sql = 'SELECT RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+                '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from monitor_priorizador where DOCUMENTO_SUGERIDO = "DEMANDAR" and CAPITAL BETWEEN  ? AND ? and  sector = ? ' +
+                '  and localidad in(?) and UBICABILIDAD NOT  IN("Inubicable","Fallecido");' 
+           
+                conexion.query(sql,[capmin,capmax,sector,loca],  (error, results)=>{
+                   if(results){
+                   // console.log(results);
+                    res.send(results);
+            
+                   }
+                   }) 
+         
+               break;
+           
+               case 'Carta Terreno':
+           
+                sql = 'SELECT RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+                '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from  monitor_priorizador where  DOCUMENTO_SUGERIDO = "DEMANDAR" AND  CAPITAL BETWEEN ?  and ? and FECHA_ULT_ABONO ' +
+                '  BETWEEN ?  and ? and SECTOR = ?  and LOCALIDAD IN (?)  ;' 
+           
+                conexion.query(sql,[capmin,capmax,fecabo,fecabo2,sector,loca],  (error, results)=>{
+                   if(results){
+                 
+                    res.send(results);
+            
+                   }
+                   }) 
+  
+               break;
+
+
+               case 'Carta Correo':
+   
+                sql = 'SELECT RUT, C0(CAPITAL), DATE_FORMAT(FEC_EXCUSA,"%Y-%m-%d") AS "FEC_EXCUSA", UBICABILIDAD, DOCUMENTO, LOCALIDAD, SECTOR, DEMANDA_ACTIVA, DATE_FORMAT(FECHA_DEMANDA,"%Y-%m-%d") as "FECHA_DEMANDA" , ' +
+                '  DOCUMENTO_SUGERIDO, FECHA_ULT_ABONO ,TRAMO , DATE_FORMAT(FECHA_CAIDA,"%Y-%m-%d") AS "FECHA_CAIDA" from  monitor_priorizador where  DOCUMENTO_SUGERIDO = "CARTA" AND  CAPITAL BETWEEN ?  and ? and FECHA_ULT_ABONO ' +
+                '  BETWEEN ?  and ? and SECTOR = ?  and LOCALIDAD IN (?)  ;' 
+           
+                conexion.query(sql,[capmin,capmax,fecabo,fecabo2,sector,loca],  (error, results)=>{
+                   if(results){
+                 
+                    res.send(results);
+            
+                   }
+                   }) 
+  
+               break;
+           
+          /*
+     
+           
+               case 'Correo':
+        
+               break;
+           */
+           
+              default:
+               //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+             
+               res.send("VACIOOP");
+               break;
+           
+           }
 
           
-        }
+        
     } catch (error) {
         console.log(error)
     }

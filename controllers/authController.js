@@ -17,9 +17,10 @@ exports.register = async (req,res)=>{
         const name =  req.body.name
         const user =  req.body.user
         const pass =  req.body.pass
+        const privi =  req.body.privilegios
         let passHash = await bycryptjs.hash(pass,8)
        // console.log(passHash);
-       conexion.query('INSERT INTO usuarios SET ?',{nombre:name,usuario:user,clave:passHash}, (error, results)=>{
+       conexion.query('INSERT INTO usuarios SET ?',{nombre:name,usuario:user,clave:passHash,privilegios:privi}, (error, results)=>{
            if(error){console.log(error)}
            res.redirect('/ingreso')
 
@@ -66,7 +67,7 @@ exports.login = async (req,res)=>{
                 }else{
                     //inicio de sesión OK
                    const id = results[0].usuario
-                    const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
+                   const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
                         expiresIn: process.env.JWT_TIEMPO_EXPIRA
                     })
                     //generamos el token SIN fecha de expiracion
@@ -81,7 +82,7 @@ exports.login = async (req,res)=>{
                    res.render('ingreso', {
                         alert: true,
                         alertTitle: "Conexión exitosa",
-                        alertMessage: "¡LOGIN CORRECTO!",
+                        alertMessage: "Bienvenido a CYD SPA",
                         alertIcon:'success',
                         showConfirmButton: false,
                         timer: 800,
@@ -110,6 +111,7 @@ exports.isAuthenticated = async (req, res, next)=>{
                 
                 }
                 req.usuario = results[0]
+                req.privi= results[0].privilegios
                 return next()
             })
         } catch (error) {
@@ -161,7 +163,7 @@ exports.showcobrador = async (req, res,next)=>{
             lastDay = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
  
     
-        conexion.query('CALL MONITOR_EXCUSAS(?,?)',[fecini,lastDay],  (error, results)=>{
+        conexion.query('CALL MONITOR_EXCUSAS(?,?,?)',[fecini,lastDay,2],  (error, results)=>{
             if(!results){return next()}
             req.datos = results[0] ; 
             return next()
@@ -180,12 +182,13 @@ exports.cobradoresultado = async (req,res)=>{
     try {
         const fecini = req.body.fecha
         const fecfin = req.body.fecha2
+        const tipo = req.body.tipo
         if(isEmpty(fecini) || isEmpty(fecfin)  ){
             res.send("VACIO");
         }else{
             
          
-            conexion.query('CALL MONITOR_EXCUSAS(?,?)',[fecini,fecfin],  (error, results)=>{
+            conexion.query('CALL MONITOR_EXCUSAS(?,?,?)',[fecini,fecfin,tipo],  (error, results)=>{
                if(results){
                 res.send(results[0]);
         
@@ -610,6 +613,151 @@ exports.demandados = async (req,res)=>{
     }
 }
 
+
+exports.getFechaCargaRuta = async (req,res)=>{
+    try {
+       
+ 
+                     
+            conexion.query(' SELECT DATE_FORMAT(fecha,"%Y-%m-%d") as fecha  FROM rutas_cobranza_monitor  group by fecha order by fecha desc limit 10;',  (error, results)=>{
+               if(results.length > 0){
+                   res.send(results);
+               }else{
+                  res.send("NoDatos");
+               }
+           }) 
+
+          
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.getNumeroCarga = async (req,res)=>{
+    try {
+       
+            const feccarga = req.body.fecha
+                     
+            conexion.query(' SELECT n_carga FROM rutas_cobranza_monitor where   fecha = ?  group by n_carga order by n_carga asc;',[feccarga],   (error, results)=>{
+               if(results.length > 0){
+                   res.send(results);
+               }else{
+                   res.send("NoDatos");
+               }
+           }) 
+
+          
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+exports.getComboCobrador = async (req,res)=>{
+    try {
+       
+            const feccarga = req.body.fecha
+            const ncarga = req.body.ncarga
+                     
+            conexion.query(' SELECT cobrador FROM rutas_cobranza_monitor where   fecha = ? and n_carga = ?  group by cobrador;',[feccarga,ncarga],   (error, results)=>{
+               if(results.length > 0){
+                   res.send(results);
+               }else{
+                   res.send("NoDatos");
+               }
+           }) 
+
+          
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.getGoogle = async (req,res)=>{
+    try {
+       
+            onexion.query(' SELECT rut FROM base_inubicables WHERE rut LIKE "%' + rreq.query.key+ '%"',(error, results)=>{
+                if(results.length > 0){
+                    res.send(results);
+                    var data = [];
+                  for (i = 0; i < results.length; i++) {
+                    data.push(results[i].rut);
+                    }      
+                    console.log('paso');
+                    res.send(JSON.stringify(data));
+
+                }else{
+                    res.send("NoDatos");
+                }
+            }) 
+
+          
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+/*
+exports.getResumenGeneral = async (req,res)=>{
+    try {
+       
+            const fecha = req.body.fecha
+            const ncarga = req.body.ncarga
+            const cobrador = req.body.cobrador
+            const radio = req.body.radiox
+            
+            if(cobrador != null && radio === 'todos' ){
+
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where fecha = ? and n_carga = ? ;'
+
+            }
+            else if (cobrador != null && radio === 'gestionados' ){
+
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where fecha = ? and n_carga = ? HAVING gestion = 1 ;'
+            }
+            
+            else if (cobrador != null && radio === 'nogestionados')
+            {
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where fecha = ? and n_carga = ? HAVING gestion = 0 ;'
+            }
+
+            else if (radio === 'todos')
+            {
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where cobrador = ? and fecha = ? and n_carga = ?  ;';
+
+            }
+            else if (radio === 'gestionados')
+            {
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where cobrador = ?  and fecha = ? and n_carga = ? HAVING gestion = 1  ;';
+            }
+            else if (radio === 'nogestionados')
+            {
+                sql = 'SELECT fecha,rut,nombre,FECHA_ULT_ESCUSA(rut)"ult escusa",saldo,deuda_total,tramo,cobrador,comuna,direccion,GET_EXPLICA_COB(rut,cobrador, ?) "gestion" FROM rutas_cobranza_monitor where cobrador = ? and fecha = ? and n_carga = ?  HAVING gestion = 0  ;';
+            }
+
+
+                     
+            conexion.query(sql,[feccarga,ncarga],   (error, results)=>{
+               if(results.length > 0){
+                   res.send(results);
+               }else{
+                   res.send("NoDatos");
+               }
+           }) 
+
+          
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+*/
 
 
 

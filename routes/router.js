@@ -43,6 +43,13 @@ router.get('/mcobrador',authController.isAuthenticated,authController.showcobrad
 })
 
 
+router.get('/resumen_cobradores',authController.isAuthenticated,(req,res)=>{
+  res.render('resumen_cobradores',{user:req.usuario,alert:false})
+
+})
+
+
+
 router.get('/priorizador',authController.isAuthenticated,(req,res)=>{
 
   if (!req.privi || req.privi != 'Administrador') {
@@ -109,6 +116,8 @@ router.post('/gettramo',authController.gettramo)
 router.post('/updatetramo',authController.updatetramo)
 router.post('/crearpdf',authController.crearpdf)
 router.post('/resumen_cobrador',authController.resumen_cobrador)
+router.post('/resumen_cob_recaudacion',authController.resumen_cob_recaudacion)
+
 router.post('/cobradoresultado',authController.cobradoresultado)
 router.post('/metacobradorgeneral',authController.metacobradorgeneral)
 router.post('/demandados',authController.demandados)

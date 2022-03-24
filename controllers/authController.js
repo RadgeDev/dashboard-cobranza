@@ -433,6 +433,42 @@ exports.resumen_cob_recaudacion = async (req,res)=>{
 }
 
 
+exports.resumen_gestion_diarias = async (req,res)=>{
+    try {
+        const fecini = req.body.fecha
+        const fecfin = req.body.fecha2
+ 
+
+        if(isEmpty(fecini) || isEmpty(fecfin)   ){
+            res.send("VACIO");
+        }else{
+            
+           /* format = toDate(fecini);
+            format2 = toDate(fecfin);
+
+        
+            var date = new Date(format);
+            var date2 = new Date(format2);
+            var firstDay =  (new Date(date.getFullYear(), date.getMonth(), 1)).toISOString().split('T')[0];
+            var lastDay = (new Date(date2.getFullYear(), date.getMonth() + 1, 0)).toISOString().split('T')[0];
+            */
+            conexion.query('CALL MONITOR_COBRADORES_DIARIOS(?,?)',[fecini,fecfin],  (error, results)=>{
+                if(results){
+                 res.send(results[0]);
+        
+         
+                }
+            }) 
+ 
+
+          
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 exports.gettramo = async (req,res)=>{
     try {

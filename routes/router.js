@@ -49,6 +49,13 @@ router.get('/resumen_cobradores',authController.isAuthenticated,(req,res)=>{
 })
 
 
+router.get('/desglose_gestion',authController.isAuthenticated,(req,res)=>{
+  res.render('desglose_gestion',{user:req.usuario,alert:false})
+
+})
+
+
+
 
 router.get('/priorizador',authController.isAuthenticated,(req,res)=>{
 
@@ -117,6 +124,8 @@ router.post('/updatetramo',authController.updatetramo)
 router.post('/crearpdf',authController.crearpdf)
 router.post('/resumen_cobrador',authController.resumen_cobrador)
 router.post('/resumen_cob_recaudacion',authController.resumen_cob_recaudacion)
+router.post('/resumen_gestion_diarias',authController.resumen_gestion_diarias)
+
 
 router.post('/cobradoresultado',authController.cobradoresultado)
 router.post('/metacobradorgeneral',authController.metacobradorgeneral)
